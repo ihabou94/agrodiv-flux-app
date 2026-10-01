@@ -1,34 +1,3 @@
-"""
-AGRODIV — Plateforme de gestion des flux commerciaux intra et inter CIC
-Filiale Céréales Ouest (FCO)
-
-Single-file Streamlit + SQLite application (version dépôts).
-
-Installation:
-    pip install streamlit pandas openpyxl
-
-Run:
-    streamlit run app.py
-
-Comptes de démonstration:
-    admin        / admin123     (Admin : tous les droits)
-    manager      / manager123   (Manager CIC SBA : consultation uniquement)
-    manager_oran / manager123   (Manager CIC Oran : consultation uniquement)
-    agent        / agent123     (Chef de dépôt SBA-01)
-    agent2       / agent123     (Chef de dépôt SBA-02)
-    agent_oran   / agent123     (Chef de dépôt ORN-01)
-
-Règles métier :
-    - Un CIC contient des dépôts. Les transferts se font de dépôt à dépôt.
-    - Agent Commercial = chef de dépôt : ne voit que les produits de son dépôt.
-        * il valide la SORTIE (Pending -> In Transit) : le stock source est déduit
-        * le chef du dépôt destinataire valide la RÉCEPTION (Received) : son stock
-          est mis à jour automatiquement, puis Completed.
-        * il peut mettre à jour le stock de son dépôt.
-    - Manager CIC : consultation uniquement, limitée aux dépôts de son CIC.
-    - Admin : tous les droits (y compris les seuils de stock bas).
-"""
-
 import base64
 import hashlib
 import io
@@ -50,7 +19,6 @@ import streamlit as st
 
 APP_TITLE = "Plateforme de gestion des flux commerciaux et inter CIC"
 COMPANY_NAME = "AGRODIV — Filiale Céréales Ouest"
-# Nouveau fichier : le schéma a changé (dépôts). L'ancienne base n'est pas touchée.
 DB_FILE = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "agrodiv_flux_v2.db"
 )
